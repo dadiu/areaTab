@@ -22,7 +22,7 @@
 .u_sel_bSearchHide input { display:none; padding:0; }
 
 .u_sel_bList { overflow:hidden; }
-.u_sel_bSearchTips { display:none; padding-left:10px; }
+.u_sel_bSearchTips { display:none; padding:20px; }
 .u_sel_bList li{float:left;width:95px;border-bottom:1px dashed #eee;color:#777;text-align:left;padding:10px;border-left:2px solid #fff;}
 .u_sel_bList li:hover{border-left:2px solid #FB3838;color:#666;}
 
