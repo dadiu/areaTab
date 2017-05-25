@@ -1,9 +1,9 @@
 /**
  * @url
- * @data    2015.04.30
+ * @data    2017.05.25
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.1.1 - 优化搜索条件
+ * @version V1.2.1 - 扩展分页
  */
 /********************* 传参说明 *********************/
 /**
@@ -51,6 +51,8 @@
 
 			domName = this,
 
+			CURRENT_PAGE = 0,
+
 			dfunc = {
 
 				init : function(options, objs){
@@ -58,7 +60,7 @@
 					var _t = this;
 
 					_t.V.getDoms(options, objs);
-					_t.M.even(options, objs)
+					_t.M.even(options, objs);
 
 				},
 
@@ -115,10 +117,11 @@
 
 					allLen : 0,		//列表长度
 					otherLen : 0, 	//是否存在测试区 默认不存在 = 技术测试区和删档测试区
+					MAX_PAGE : 0,	// tab分页
 					even : function(options, objs){
 
 						var _t = this,
-							searchVal = "";
+							searchVal = ""; 
 
 						//出现下拉
 						objs.selA.click(function(){
@@ -143,8 +146,13 @@
 
 						});
 
+						
+						_t.MAX_PAGE = objs.selBMenu.find("li").length;
 						//如果tab过多
-						if(objs.selBMenu.find("li").length >=6 ){
+						if(_t.MAX_PAGE >=6 ){
+							
+							var MAX_TAB_PAGE = Math.floor(_t.MAX_PAGE/5);
+
 							objs.selBSearch.addClass("u_sel_bSearchHide");
 							objs.selBSearch.click(function(){
 								objs.selBSearch.removeClass("u_sel_bSearchHide");
@@ -161,16 +169,28 @@
 							objs.selBTab.addClass("u_sel_bTabMore");
 
 							objs.nextBtn.click(function(){
+
+								if(CURRENT_PAGE < MAX_TAB_PAGE){
+									CURRENT_PAGE ++;
+									console.log(CURRENT_PAGE);
+									objs.selBMenu.animate({
+										"margin-left" : -CURRENT_PAGE*200 + 15
+									})
+									return false;
+								}
+								
 								//console.log(objs.selBMenu.find("li:gt(4)"));
-								objs.selBMenu.find("li:gt(5)").show();
-								objs.selBMenu.find("li:lt(5)").hide();
-								return false;
+								
 							});
 							objs.prevBtn.click(function(){
-								//console.log(objs.selBMenu.find("li:lt(4)"));
-								objs.selBMenu.find("li:lt(5)").show();
-								objs.selBMenu.find("li:gt(5)").hide();
-								return false;
+								
+								if(CURRENT_PAGE > 0){
+									CURRENT_PAGE --;
+									objs.selBMenu.animate({
+										"margin-left" : -CURRENT_PAGE*200 + 15
+									})
+									return false;
+								}
 							});
 							//objs["selBTab"].find("li:gt(5)").hide();
 						};

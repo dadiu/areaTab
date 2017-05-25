@@ -32,8 +32,8 @@
 .u_areaTabPrev, .u_areaTabNext { display:none; position:absolute; width:15px; text-align:center; height:30px; line-height:30px; text-decoration:none; color:#000; font-family:arial; top:0; background:#ddd;  }
 .u_areaTabNext { right:31px; border-left:1px solid #fff; border-right:1px solid #bebebe; }
 .u_areaTabNextMove { right:85px; }
-.u_areaTabPrev { left:1px; border-right:1px solid #fff; }
-.u_sel_bTabMore ul { margin-left:16px; }
+.u_areaTabPrev { left:0; border-right:1px solid #fff; }
+.u_sel_bTabMore ul { margin-left:15px; }
 
 
 
